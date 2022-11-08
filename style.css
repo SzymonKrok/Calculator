@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;600&display=swap');
+
+*, *::after, *::before {
+    box-sizing: border-box;
+    font-family: "Red Hat Display", sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: #fff;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background: #C0C0C0;
+}
+
+.calculator {
+    min-height: 90vh;
+    margin: 25px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(4, 70px);
+    grid-template-rows: minmax(100px, auto) repeat(5, 70px);
+}
+
+.display {
+    grid-column: 1 / -1;
+    background: #575b5d;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 15px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.previous-operation {
+    font-size: 16px;
+    color: rgba(255,255,255, .65);
+}
+
+.current-operation {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.col-two {
+    grid-column: span 2;
+}
+
+button {
+    background: #313335;
+    outline: none;
+    border: 1px solid #575b5d;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #383a3c;
+}
