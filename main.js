@@ -12,8 +12,7 @@ let firstNumber = '',
     secondNumber = '',
     operation = undefined;
 
-// Empty comment
-
+// Update result on our calculator
 const updateResult = () => {
     currentOperation.innerText = firstNumber;
     if(operation !== undefined){
@@ -25,6 +24,7 @@ const updateResult = () => {
 
 }
 
+// Add number and check dot in number
 const addNumber = (number) => {
     if(number === '.'){
         if(firstNumber.includes('.')){
@@ -34,6 +34,7 @@ const addNumber = (number) => {
     firstNumber = firstNumber.toString() + number.toString();
 }
 
+// Possibility to select a negative number
 const chooseOperator = (operator) => {
     if(currentOperation.innerText === ''){
         if(operator !== "-") {
@@ -52,8 +53,8 @@ const chooseOperator = (operator) => {
 
 }
 
+// Main calculator functionality
 const equals = () => {
-    // console.log(operator);
 
     let calculations;
 
@@ -87,6 +88,7 @@ const equals = () => {
 
 }
 
+// Operation of the AC and DEL buttons
 const removeNumber = () => {
     firstNumber = firstNumber.toString().slice(0, -1);
     updateResult();
@@ -95,9 +97,11 @@ const removeNumber = () => {
 const deleteAll = () => {
     firstNumber = '';
     secondNumber = '';
+    operation = '';
     updateResult();
 }
 
+// Operate click number and operators
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
         addNumber(number.innerText);
@@ -112,6 +116,8 @@ operators.forEach((operator) => {
     })
 })
 
+// Setting listener for a click
+
 backBtn.addEventListener('click', removeNumber);
 
 deleteBtn.addEventListener('click', deleteAll);
@@ -122,9 +128,3 @@ equalsBtn.addEventListener('click', () => {
 } )
 
 
-document.querySelector('body').addEventListener("click", (number) => {
-    console.log("Number: " + number.innerText)
-    console.log("First: " + firstNumber);
-    console.log("Second: " + secondNumber);
-    console.log("Operator: " + operation);
-})
