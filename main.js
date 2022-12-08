@@ -15,8 +15,14 @@ let firstNumber = '',
 // Empty comment
 
 const updateResult = () => {
-    previousOperation.innerText = secondNumber;
-    currentOperation.innerText = firstNumber
+    currentOperation.innerText = firstNumber;
+    if(operation !== undefined){
+        previousOperation.innerText = secondNumber + operation;
+    } else {
+        previousOperation.innerText = '';
+    }
+
+
 }
 
 const addNumber = (number) => {
@@ -29,12 +35,56 @@ const addNumber = (number) => {
 }
 
 const chooseOperator = (operator) => {
-    operation = operator.toString();
-    if(operation !== undefined){
-        secondNumber = firstNumber + operation;
-        firstNumber = '';
-        updateResult()
+    if(currentOperation.innerText === ''){
+        if(operator !== "-") {
+            return;
+        }
     }
+
+    if(previousOperation.innerText !== ''){
+        equals();
+    }
+
+    operation = operator;
+    secondNumber = firstNumber;
+    firstNumber = '';
+
+
+}
+
+const equals = () => {
+    // console.log(operator);
+
+    let calculations;
+
+    if(!previousOperation || !currentOperation){
+        return;
+    }
+
+    const first = parseFloat(firstNumber);
+    const second = parseFloat(secondNumber);
+
+    switch (operation){
+        case '+':
+            calculations = second + first;
+            break;
+        case '-':
+            calculations = second - first;
+            break;
+        case '*':
+            calculations = second * first;
+            break;
+        case '/':
+            calculations = second / first;
+            break;
+        default:
+            return;
+    }
+
+    firstNumber = calculations;
+    secondNumber = '';
+    operation = undefined;
+
 }
 
 const removeNumber = () => {
@@ -52,19 +102,29 @@ numbers.forEach((number) => {
     number.addEventListener('click', () => {
         addNumber(number.innerText);
         updateResult();
-        console.log("Number: " + number.innerText)
-        console.log("First: " + firstNumber);
-        console.log("Second: " + secondNumber);
-        console.log("Operator: " + operation);
     })
 })
 
 operators.forEach((operator) => {
     operator.addEventListener('click', () => {
         chooseOperator(operator.innerText);
+        updateResult();
     })
 })
 
 backBtn.addEventListener('click', removeNumber);
 
-deleteBtn.addEventListener('click', deleteAll)
+deleteBtn.addEventListener('click', deleteAll);
+
+equalsBtn.addEventListener('click', () => {
+    equals();
+    updateResult();
+} )
+
+
+document.querySelector('body').addEventListener("click", (number) => {
+    console.log("Number: " + number.innerText)
+    console.log("First: " + firstNumber);
+    console.log("Second: " + secondNumber);
+    console.log("Operator: " + operation);
+})
