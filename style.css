@@ -14,6 +14,13 @@ body {
     background: #C0C0C0;
 }
 
+.title {
+    font-size: 46px;
+    text-align: center;
+    color: #000;
+    margin-top: 50px;
+}
+
 .calculator {
     min-height: 90vh;
     margin: 25px;
